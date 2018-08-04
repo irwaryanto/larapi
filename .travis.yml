@@ -1,0 +1,14 @@
+language: php
+
+php:
+  - 7.2.7
+
+before_script:
+  - cp .env.travis .env
+  - php -r "new SQLite3('database/testing.sqlite');"
+  - composer self-update
+  - composer install --no-interaction
+  - php artisan key:generate
+
+script:
+  - vendor/bin/phpunit
